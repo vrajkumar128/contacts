@@ -164,6 +164,7 @@ body, .app {
   justify-content: center;
 }
 .contact-details p {
+  display: block;
   margin: 0;
   min-width: 0;
   white-space: nowrap;

@@ -1,16 +1,40 @@
 import React from 'react';
-import { ListContacts } from './components/ListContacts/ListContacts';
+import { SearchBar } from './components/SearchBar/SearchBar';
+import { ContactList } from './components/ContactList/ContactList';
 import * as ContactsAPI from './utils/ContactsAPI';
 
 class App extends React.Component {
   state = {
-    contacts: []
+    contacts: [],
+    query: ''
   }
 
+  // Populate state.contacts with request to backend server
   async componentDidMount() {
     let contacts = await ContactsAPI.getAll();
     this.setState({
       contacts: contacts
+    });
+  }
+
+  // Update state.contacts with new array
+  updateContacts = contacts => {
+    this.setState({
+      contacts: contacts
+    });
+  }
+
+  // Update state.query with new string
+  updateQuery = query => {
+    this.setState({
+      query: query
+    });
+  }
+
+  // Reset state.query
+  clearQuery = () => {
+    this.setState({
+      query: ''
     });
   }
 
@@ -24,10 +48,20 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <ListContacts contacts={this.state.contacts} onRemove={this.removeContact} />
+      <div className="list-contacts">
+        <SearchBar
+          query={this.state.query}
+          onChange={this.updateQuery}
+        />
+        <ContactList
+          contacts={this.state.contacts}
+          query={this.state.query}
+          updateContacts={this.updateContacts}
+          clearQuery={this.clearQuery}
+          onRemove={this.removeContact}
+        />
       </div>
-    )
+    );
   }
 }
 

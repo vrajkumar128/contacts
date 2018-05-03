@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export class SearchBar extends React.Component {
@@ -15,12 +16,11 @@ export class SearchBar extends React.Component {
           placeholder="Search contacts"
           value={this.props.query}
           onChange={this.handleChange} />
-        <a
-          href="#create"
-          className="add-contact"
-          onClick={this.props.onNavigate} >
+        <Link
+          to="/create"
+          className="add-contact" >
             Add Contact
-        </a>
+        </Link>
       </div>
     );
   }
@@ -28,6 +28,5 @@ export class SearchBar extends React.Component {
 
 SearchBar.propTypes = {
   onChange: PropTypes.func.isRequired,
-  query: PropTypes.string.isRequired,
-  onNavigate: PropTypes.func.isRequired
+  query: PropTypes.string.isRequired
 }

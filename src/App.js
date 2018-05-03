@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import { SearchBar } from './components/SearchBar/SearchBar';
 import { ContactList } from './components/ContactList/ContactList';
 import { CreateContact } from './components/CreateContact/CreateContact';
@@ -7,8 +8,7 @@ import * as ContactsAPI from './utils/ContactsAPI';
 class App extends React.Component {
   state = {
     contacts: [],
-    query: '',
-    screen: 'list'
+    query: ''
   }
 
   // Populate state.contacts with request to backend server
@@ -48,22 +48,14 @@ class App extends React.Component {
     ContactsAPI.remove(contact);
   }
 
-  // Change state.screen to 'create'
-  updateScreen = () => {
-    this.setState({
-      screen: 'create'
-    })
-  }
-
   render() {
     return (
       <div>
-        {this.state.screen === 'list' && (
+        <Route exact path="/" render={() => (
           <div className="list-contacts">
             <SearchBar
               query={this.state.query}
               onChange={this.updateQuery}
-              onNavigate={this.updateScreen}
             />
             <ContactList
               contacts={this.state.contacts}
@@ -73,10 +65,8 @@ class App extends React.Component {
               onRemove={this.removeContact}
             />
           </div>
-        )}
-        {this.state.screen === 'create' && (
-          <CreateContact />
-        )}
+        )} />
+        <Route path="/create" component={CreateContact} />
       </div>
     );
   }

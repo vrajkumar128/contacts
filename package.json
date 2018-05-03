@@ -5,7 +5,8 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-beautiful-dnd": "^7.1.2",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "gh-pages": "^1.1.0",

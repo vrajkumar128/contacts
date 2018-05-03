@@ -1,12 +1,14 @@
 import React from 'react';
 import { SearchBar } from './components/SearchBar/SearchBar';
 import { ContactList } from './components/ContactList/ContactList';
+import { CreateContact } from './components/CreateContact/CreateContact';
 import * as ContactsAPI from './utils/ContactsAPI';
 
 class App extends React.Component {
   state = {
     contacts: [],
-    query: ''
+    query: '',
+    screen: 'list'
   }
 
   // Populate state.contacts with request to backend server
@@ -46,20 +48,35 @@ class App extends React.Component {
     ContactsAPI.remove(contact);
   }
 
+  // Change state.screen to 'create'
+  updateScreen = () => {
+    this.setState({
+      screen: 'create'
+    })
+  }
+
   render() {
     return (
-      <div className="list-contacts">
-        <SearchBar
-          query={this.state.query}
-          onChange={this.updateQuery}
-        />
-        <ContactList
-          contacts={this.state.contacts}
-          query={this.state.query}
-          updateContacts={this.updateContacts}
-          clearQuery={this.clearQuery}
-          onRemove={this.removeContact}
-        />
+      <div>
+        {this.state.screen === 'list' && (
+          <div className="list-contacts">
+            <SearchBar
+              query={this.state.query}
+              onChange={this.updateQuery}
+              onNavigate={this.updateScreen}
+            />
+            <ContactList
+              contacts={this.state.contacts}
+              query={this.state.query}
+              updateContacts={this.updateContacts}
+              clearQuery={this.clearQuery}
+              onRemove={this.removeContact}
+            />
+          </div>
+        )}
+        {this.state.screen === 'create' && (
+          <CreateContact />
+        )}
       </div>
     );
   }

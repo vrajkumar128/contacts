@@ -15,6 +15,12 @@ export class SearchBar extends React.Component {
           placeholder="Search contacts"
           value={this.props.query}
           onChange={this.handleChange} />
+        <a
+          href="#create"
+          className="add-contact"
+          onClick={this.props.onNavigate} >
+            Add Contact
+        </a>
       </div>
     );
   }
@@ -22,5 +28,6 @@ export class SearchBar extends React.Component {
 
 SearchBar.propTypes = {
   onChange: PropTypes.func.isRequired,
-  query: PropTypes.string.isRequired
+  query: PropTypes.string.isRequired,
+  onNavigate: PropTypes.func.isRequired
 }

@@ -16,10 +16,8 @@ export class SearchBar extends React.Component {
           placeholder="Search contacts"
           value={this.props.query}
           onChange={this.handleChange} />
-        <Link
-          to="/create"
-          className="add-contact" >
-            Add Contact
+        <Link to="/create" className="add-contact">
+          Add Contact
         </Link>
       </div>
     );

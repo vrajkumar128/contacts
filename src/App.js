@@ -48,6 +48,14 @@ class App extends React.Component {
     ContactsAPI.remove(contact);
   }
 
+  // Add a new contact to state.contacts
+  async createContact(contact) {
+    let newContact = await ContactsAPI.create(contact);
+    this.setState({
+      contacts: this.state.contacts.concat([newContact])
+    });
+  }
+
   render() {
     return (
       <div>
@@ -66,7 +74,12 @@ class App extends React.Component {
             />
           </div>
         )} />
-        <Route path="/create" component={CreateContact} />
+        <Route path="/create" render={({ history }) => (
+          <CreateContact onCreateContact={contact => {
+            this.createContact(contact);
+            history.push('/');
+          }} />
+        )} />
       </div>
     );
   }

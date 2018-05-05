@@ -17,7 +17,7 @@ export const Contact = props => (
 );
 
 Contact.propTypes = {
-  contactAvatarURL: PropTypes.string.isRequired,
+  contactAvatarURL: PropTypes.string,
   contactName: PropTypes.string.isRequired,
   contactHandle: PropTypes.string.isRequired,
   onRemove: PropTypes.func.isRequired,

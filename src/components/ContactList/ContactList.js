@@ -61,14 +61,15 @@ export class ContactList extends React.Component {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                         >
-                          <Contact
-                            contact={contact}
-                            key={contact.id}
-                            contactAvatarURL={contact.avatarURL}
-                            contactName={contact.name}
-                            contactHandle={contact.handle}
-                            onRemove={this.props.onRemove}
-                          />
+                          <li key={contact.id}>
+                            <Contact
+                              contact={contact}
+                              contactAvatarURL={contact.avatarURL}
+                              contactName={contact.name}
+                              contactHandle={contact.handle}
+                              onRemove={this.props.onRemove}
+                            />
+                          </li>
                         </div>
                       )}
                     </Draggable>
